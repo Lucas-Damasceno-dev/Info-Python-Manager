@@ -1,4 +1,4 @@
-def situacao() -> list:
+def ler_arquivo() -> list:
     with open('arquivo.txt', 'r') as arquivo:
         dados = arquivo.readlines()
         cont = 0
@@ -33,28 +33,28 @@ def situacao() -> list:
         return [numero_de_politicos, numero_de_empresas, valores_das_propinas, numero_de_parcelas]
 
 
-situacao()
+ler_arquivo()
 
 
-def montante():
-    numero_de_politico = situacao()[0]
-    numero_de_empresas = situacao()[1]
-    valores_das_propinas = situacao()[2]
-    numero_de_parcelas = situacao()[3]
-    propinas = []
-    parcelas = []
+def calcula_montante():
+    numero_de_politico = ler_arquivo()[0]
+    numero_de_empresas = ler_arquivo()[1]
+    valores_das_propinas = ler_arquivo()[2]
+    numero_de_parcelas = ler_arquivo()[3]
+    todas_propinas = []
+    todas_parcelas = []
     taxa_juros = 3.9944
     
-    for i in range(0, len(valores_das_propinas), numero_de_empresas):
-        propinas.append(valores_das_propinas[i:i+numero_de_empresas])
+    for pos in range(0, len(valores_das_propinas), numero_de_empresas):
+        todas_propinas.append(valores_das_propinas[pos:pos+numero_de_empresas])
         
-    for o in range(0, len(numero_de_parcelas), numero_de_politico):
-        parcelas.append(numero_de_parcelas[o:o+numero_de_politico])
+    for pos in range(0, len(numero_de_parcelas), numero_de_politico):
+        todas_parcelas.append(numero_de_parcelas[pos:pos+numero_de_politico])
     
     politicos = []
-    for i in range(1, numero_de_politico + 1):
-        propinas_politico = propinas[i-1]
-        parcelas_politico = parcelas[i-1]
+    for politico in range(1, numero_de_politico + 1):
+        propinas_politico = todas_propinas[politico-1]
+        parcelas_politico = todas_parcelas[politico-1]
         montantes_politico = []
         
         for parcela in parcelas_politico:
@@ -71,4 +71,4 @@ def montante():
     return politicos
 
 
-print(montante())
+calcula_montante()
