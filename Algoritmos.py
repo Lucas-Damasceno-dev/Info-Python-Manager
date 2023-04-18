@@ -36,7 +36,7 @@ def ler_arquivo() -> list:
 ler_arquivo()
 
 
-def calcula_montante():
+def calcular_montante():
     numero_de_politico = ler_arquivo()[0]
     numero_de_empresas = ler_arquivo()[1]
     valores_das_propinas = ler_arquivo()[2]
@@ -71,4 +71,4 @@ def calcula_montante():
     return politicos
 
 
-calcula_montante()
+calcular_montante()
