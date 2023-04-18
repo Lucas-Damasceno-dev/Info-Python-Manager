@@ -27,8 +27,8 @@ def ler_arquivo() -> list:
                 num3 = informacoes[10:16]
                 numero_de_parcelas = []
                 for lin in num3:
-                    for valo in lin:
-                        numero_de_parcelas.append(int(valo.replace(',', '')))
+                    for value in lin:
+                        numero_de_parcelas.append(int(value.replace(',', '')))
                         
         return [numero_de_politicos, numero_de_empresas, valores_das_propinas, numero_de_parcelas]
 
