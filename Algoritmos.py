@@ -1,36 +1,29 @@
-def ler_arquivo() -> list:
+def ler_arquivo():
     with open('arquivo.txt', 'r') as arquivo:
-        dados = arquivo.readlines()
+        numeros_de_politicos_e_empresas = []
+        numeros_de_propinas = []
+        numeros_de_parcelas = []
         cont = 0
-        informacoes = []
-        
-        for linha in dados:
-            informacoes.append(linha.split())
+        for linha in arquivo:
             cont += 1
-            
-            if cont == 1:
-                num = informacoes[0][2]
-                numero_de_politicos = int(num)
-                
-            if cont == 2:
-                num1 = informacoes[0][2]
-                numero_de_empresas = int(num1)
-                
-            if cont == 8:
-                num2 = informacoes[3:9]
-                valores_das_propinas = []
-                for lista in num2:
-                    for valor in lista:
-                        valores_das_propinas.append(int(valor.replace(',', '')))
-                        
-            if cont == 15:
-                num3 = informacoes[10:16]
-                numero_de_parcelas = []
-                for lin in num3:
-                    for value in lin:
-                        numero_de_parcelas.append(int(value.replace(',', '')))
-                        
-        return [numero_de_politicos, numero_de_empresas, valores_das_propinas, numero_de_parcelas]
+            elementos = linha.split()
+
+            if cont < 3:
+                for caractere in elementos:
+                    if caractere.isdigit():
+                        numeros_de_politicos_e_empresas.append(int(caractere))
+
+            elif 2 < cont < sum(numeros_de_politicos_e_empresas):
+                for caractere in elementos:
+                    if caractere.isdigit():
+                        numeros_de_propinas.append(int(caractere))
+
+            else:
+                for caractere in elementos:
+                    if caractere.isdigit():
+                        numeros_de_parcelas.append(caractere)
+
+    return [numeros_de_politicos_e_empresas, numeros_de_propinas, numeros_de_parcelas]
 
 
 ler_arquivo()
