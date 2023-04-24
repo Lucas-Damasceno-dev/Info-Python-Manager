@@ -64,5 +64,19 @@ def calcular_montante():
     return politicos
 
 
-a = calcular_montante()
-print(a)
+calcular_montante()
+
+
+def calcular_total_gasto_por_empresa():
+    numero_de_empresas = ler_arquivo()[0][1]
+    valores_das_propinas = ler_arquivo()[1]
+    tot_propina_por_empresa = []
+
+    for i in range(0, len(valores_das_propinas), numero_de_empresas):
+        tot_propina_por_empresa.append(sum(valores_das_propinas[i:i+numero_de_empresas]))
+        
+    return tot_propina_por_empresa
+
+
+calcular_total_gasto_por_empresa()
+
