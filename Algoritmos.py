@@ -21,7 +21,7 @@ def ler_arquivo():
             else:
                 for caractere in elementos:
                     if caractere.isdigit():
-                        numeros_de_parcelas.append(caractere)
+                        numeros_de_parcelas.append(int(caractere))
 
     return [numeros_de_politicos_e_empresas, numeros_de_propinas, numeros_de_parcelas]
 
@@ -30,10 +30,10 @@ ler_arquivo()
 
 
 def calcular_montante():
-    numero_de_politico = ler_arquivo()[0]
-    numero_de_empresas = ler_arquivo()[1]
-    valores_das_propinas = ler_arquivo()[2]
-    numero_de_parcelas = ler_arquivo()[3]
+    numero_de_politico = ler_arquivo()[0][0]
+    numero_de_empresas = ler_arquivo()[0][1]
+    valores_das_propinas = ler_arquivo()[1]
+    numero_de_parcelas = ler_arquivo()[2]
     todas_propinas = []
     todas_parcelas = []
     taxa_juros = 3.9944
@@ -64,4 +64,5 @@ def calcular_montante():
     return politicos
 
 
-calcular_montante()
+a = calcular_montante()
+print(a)
