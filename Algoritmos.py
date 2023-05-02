@@ -1,48 +1,58 @@
 def ler_arquivo():
     with open('arquivo.txt', 'r') as arquivo:
-        numeros_de_politicos_e_empresas = []
-        numeros_de_propinas = []
+        taxa_de_juros = 0
+        numero_de_politicos = 0
+        numero_de_empresas = 0
+        valores_das_propinas = []
         numeros_de_parcelas = []
         cont = 0
         for linha in arquivo:
             cont += 1
-            elementos = linha.split()
+            elementos = linha.strip().split()
+            
+            if cont == 1:
+                for caractere in elementos:
+                    if caractere.replace('.', '').isdigit():
+                        taxa_de_juros = float(caractere)
 
-            if cont < 3:
+            elif cont == 2:
                 for caractere in elementos:
                     if caractere.isdigit():
-                        numeros_de_politicos_e_empresas.append(int(caractere))
-
-            elif 2 < cont < sum(numeros_de_politicos_e_empresas):
+                        numero_de_politicos = int(caractere)
+                        
+            elif cont == 3:
                 for caractere in elementos:
                     if caractere.isdigit():
-                        numeros_de_propinas.append(int(caractere))
+                        numero_de_empresas = int(caractere)
+
+            elif 3 < cont < numero_de_politicos + numero_de_empresas:
+                for caractere in elementos:
+                    if caractere.isdigit():
+                        valores_das_propinas.append(int(caractere))
 
             else:
                 for caractere in elementos:
                     if caractere.isdigit():
                         numeros_de_parcelas.append(int(caractere))
 
-    return [numeros_de_politicos_e_empresas, numeros_de_propinas, numeros_de_parcelas]
+    return [taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas]
 
 
 ler_arquivo()
 
 
-def calcular_montante():
-    numero_de_politico = ler_arquivo()[0][0]
-    numero_de_empresas = ler_arquivo()[0][1]
-    valores_das_propinas = ler_arquivo()[1]
-    numero_de_parcelas = ler_arquivo()[2]
+'''def calcular_montante():
+    numeros_de_politicos_e_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
+    numero_de_politico, numero_de_empresa = numeros_de_politicos_e_empresas
     todas_propinas = []
     todas_parcelas = []
     taxa_juros = 3.9944
 
-    for pos in range(0, len(valores_das_propinas), numero_de_empresas):
-        todas_propinas.append(valores_das_propinas[pos:pos + numero_de_empresas])
+    for pos in range(0, len(valores_das_propinas), numero_de_empresa):
+        todas_propinas.append(valores_das_propinas[pos:pos + numero_de_empresa])
 
-    for pos in range(0, len(numero_de_parcelas), numero_de_politico):
-        todas_parcelas.append(numero_de_parcelas[pos:pos + numero_de_politico])
+    for pos in range(0, len(numeros_de_parcelas), numero_de_politico):
+        todas_parcelas.append(numeros_de_parcelas[pos:pos + numero_de_politico])
 
     politicos = []
     for politico in range(1, numero_de_politico + 1):
@@ -68,24 +78,24 @@ calcular_montante()
 
 
 def calcular_total_gasto_por_empresa():
-    numero_de_empresas = ler_arquivo()[0][1]
-    valores_das_propinas = ler_arquivo()[1]
+    numeros_de_politicos_e_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
+    numero_de_politico, numero_de_empresa = numeros_de_politicos_e_empresas
     total_propina_por_empresa = []
 
-    for i in range(0, len(valores_das_propinas), numero_de_empresas):
-        total_propina_por_empresa.append(sum(valores_das_propinas[i:i + numero_de_empresas]))
+    for i in range(0, len(valores_das_propinas), numero_de_empresa):
+        total_propina_por_empresa.append(sum(valores_das_propinas[i:i + numero_de_empresa]))
 
     return total_propina_por_empresa
 
 
-calcular_total_gasto_por_empresa()
+calcular_total_gasto_por_empresa()'''
 
 
 '''Informar qual foi o político que mais recebeu propina, o total de propina recebida (com e sem juros) e o juros 
 recebido.'''
 
 
-def analisa_dados_politicos():
+'''def analisa_dados_politicos():
     numeros_de_politicos_e_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
     numero_de_politico, numero_de_empresa = numeros_de_politicos_e_empresas
     tot_propina_empresa = []
@@ -96,7 +106,7 @@ def analisa_dados_politicos():
 
 
 analisa_dados_politicos()
-
+'''
 
 '''def calcular_total_gasto_por_empresa():
     numeros_de_politicos_e_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
