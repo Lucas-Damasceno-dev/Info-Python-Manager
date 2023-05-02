@@ -41,27 +41,25 @@ def ler_arquivo():
 ler_arquivo()
 
 
-'''def calcular_montante():
-    numeros_de_politicos_e_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
-    numero_de_politico, numero_de_empresa = numeros_de_politicos_e_empresas
+def calcular_montante():
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
     todas_propinas = []
     todas_parcelas = []
-    taxa_juros = 3.9944
 
-    for pos in range(0, len(valores_das_propinas), numero_de_empresa):
-        todas_propinas.append(valores_das_propinas[pos:pos + numero_de_empresa])
+    for pos in range(0, len(valores_das_propinas), numero_de_empresas):
+        todas_propinas.append(valores_das_propinas[pos:pos + numero_de_empresas])
 
-    for pos in range(0, len(numeros_de_parcelas), numero_de_politico):
-        todas_parcelas.append(numeros_de_parcelas[pos:pos + numero_de_politico])
+    for pos in range(0, len(numeros_de_parcelas), numero_de_politicos):
+        todas_parcelas.append(numeros_de_parcelas[pos:pos + numero_de_politicos])
 
     politicos = []
-    for politico in range(1, numero_de_politico + 1):
+    for politico in range(1, numero_de_politicos + 1):
         propinas_politico = todas_propinas[politico - 1]
         parcelas_politico = todas_parcelas[politico - 1]
         montantes_politico = []
 
         for parcela in parcelas_politico:
-            juros = taxa_juros / 12
+            juros = taxa_de_juros / 12
             montante_individual = propinas_politico[0] * ((1 + juros) ** parcela - 1) / juros
             montantes_politico.append(montante_individual)
 
@@ -74,10 +72,10 @@ ler_arquivo()
     return politicos
 
 
-calcular_montante()
+print(calcular_montante())
 
 
-def calcular_total_gasto_por_empresa():
+'''def calcular_total_gasto_por_empresa():
     numeros_de_politicos_e_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
     numero_de_politico, numero_de_empresa = numeros_de_politicos_e_empresas
     total_propina_por_empresa = []
