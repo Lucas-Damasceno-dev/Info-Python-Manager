@@ -27,8 +27,8 @@ def ler_arquivo():
 
             elif 3 < cont < numero_de_politicos + numero_de_empresas:
                 for caractere in elementos:
-                    if caractere.isdigit():
-                        valores_das_propinas.append(int(caractere))
+                    if caractere.replace('.', '').isdigit():
+                        valores_das_propinas.append(float(caractere))
 
             else:
                 for caractere in elementos:
@@ -72,33 +72,63 @@ def calcular_montante():
     return politicos
 
 
-print(calcular_montante())
+calcular_montante()
 
 
-'''def calcular_total_gasto_por_empresa():
-    numeros_de_politicos_e_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
-    numero_de_politico, numero_de_empresa = numeros_de_politicos_e_empresas
+def calcular_total_gasto_por_empresa():
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
     total_propina_por_empresa = []
 
-    for i in range(0, len(valores_das_propinas), numero_de_empresa):
-        total_propina_por_empresa.append(sum(valores_das_propinas[i:i + numero_de_empresa]))
+    for i in range(0, len(valores_das_propinas), numero_de_empresas):
+        total_propina_por_empresa.append(sum(valores_das_propinas[i:i + numero_de_empresas]))
 
     return total_propina_por_empresa
 
 
-calcular_total_gasto_por_empresa()'''
+calcular_total_gasto_por_empresa()
 
 
-'''Informar qual foi o político que mais recebeu propina, o total de propina recebida (com e sem juros) e o juros 
-recebido.'''
+def politico_mais_recebeu():
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
+    info_politicos = calcular_montante()
+    maior_montante = 0
+    politico_mais_propinas = {}
+    
+    for politico in info_politicos:
+        propinas_politico = politico['Propinas']
+        parcelas_politico = politico['Parcelas']
+        montantes_politico = []
+        juros_politico = 0
+        
+        for parcela in parcelas_politico:
+            juros = taxa_de_juros / 12
+            montante_individual = propinas_politico[0] * ((1 + juros) ** parcela - 1) / juros
+            montantes_politico.append(montante_individual)
+            juros_politico += montante_individual - propinas_politico[0]
+
+        montante_total = sum(montantes_politico)
+        
+        if montante_total > maior_montante:
+            maior_montante = montante_total
+            politico_mais_propinas = {
+                "Nome": "Político " + str(info_politicos.index(politico) + 1),
+                "Propinas Recebidas": sum(propinas_politico),
+                "Total com Juros": montante_total,
+                "Juros Recebidos": juros_politico
+            }
+            
+    return politico_mais_propinas
+
+
+politico_mais_recebeu()
+
 
 
 '''def analisa_dados_politicos():
-    numeros_de_politicos_e_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
-    numero_de_politico, numero_de_empresa = numeros_de_politicos_e_empresas
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()    
     tot_propina_empresa = []
-    for i in range(numeros_de_politicos_e_empresas[0]):
-        propinas_empresa = valores_das_propinas[i*numero_de_empresa:(i+1)*numero_de_empresa]
+    for i in range(numero_de_empresas):
+        propinas_empresa = valores_das_propinas[i*numero_de_empresas:(i+1)*numero_de_empresas]
         tot_propina_empresa.append(sum(propinas_empresa))
     print(tot_propina_empresa)
 
