@@ -1,0 +1,57 @@
+Montantes dos políticos:
+Político 1:
+Propinas: [10.0, 20.0, 30.0, 40.0, 50.0]
+Parcelas: [1, 2, 3, 4, 5]
+Montante total: 235.53
+
+Político 2:
+Propinas: [60.0, 70.0, 80.0, 90.0, 100.0]
+Parcelas: [6, 7, 8, 9, 10]
+Montante total: 8834.70
+
+Político 3:
+Propinas: [110.0, 120.0, 130.0, 140.0, 150.0]
+Parcelas: [11, 12, 13, 14, 15]
+Montante total: 73432.77
+
+Político 4:
+Propinas: [160.0, 170.0, 180.0, 190.0, 200.0]
+Parcelas: [16, 17, 18, 19, 20]
+Montante total: 457021.51
+
+Político 5:
+Propinas: [210.0, 220.0, 230.0, 240.0, 250.0]
+Parcelas: [21, 22, 23, 24, 25]
+Montante total: 2533418.52
+
+Total gasto por empresa:
+Empresa 1: 150.00
+Empresa 2: 400.00
+Empresa 3: 650.00
+Empresa 4: 900.00
+Empresa 5: 1150.00
+
+Político que mais recebeu:
+Nome: Político 5
+Propinas Recebidas: 1150.00
+Total com Juros: 2533418.52
+Juros Recebidos: 2532368.52
+
+Político que menos recebeu:
+Nome: Político 1
+Propinas Recebidas: 150.00
+Total com Juros: 235.53
+Juros Recebidos: 185.53
+
+Empresa que mais pagou:
+{'Nome': 'Empresa 5', 'Propinas Pagas': 1150.0, 'Total com Juros': 2533418.519346035, 'Juros Pagos': 2532368.519346035}
+
+Empresa que menos pagou:
+{'Nome': 'Empresa 1', 'Propinas Pagas': 150.0, 'Total com Juros': 235.52903483205375, 'Juros Pagos': 185.52903483205375}
+
+Média de propina por político:
+122917.72114518208
+
+Média de propina por empresa:
+{'Empresa 1': 30.0, 'Empresa 2': 80.0, 'Empresa 3': 130.0, 'Empresa 4': 180.0, 'Empresa 5': 230.0}
+
