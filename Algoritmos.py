@@ -9,7 +9,7 @@ def ler_arquivo():
         for linha in arquivo:
             cont += 1
             elementos = linha.strip().split()
-            
+
             if cont == 1:
                 for caractere in elementos:
                     if caractere.replace('.', '').isdigit():
@@ -19,7 +19,7 @@ def ler_arquivo():
                 for caractere in elementos:
                     if caractere.isdigit():
                         numero_de_politicos = int(caractere)
-                        
+
             elif cont == 3:
                 for caractere in elementos:
                     if caractere.isdigit():
@@ -41,8 +41,8 @@ def ler_arquivo():
 ler_arquivo()
 
 
-def calcular_montante():
-    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
+def calcular_montante(a):
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = a
     todas_propinas = []
     todas_parcelas = []
 
@@ -72,11 +72,8 @@ def calcular_montante():
     return politicos
 
 
-calcular_montante()
-
-
-def calcular_total_gasto_por_empresa():
-    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
+def calcular_total_gasto_por_empresa(a):
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = a
     total_propina_por_empresa = []
 
     for i in range(0, len(valores_das_propinas), numero_de_empresas):
@@ -85,21 +82,18 @@ def calcular_total_gasto_por_empresa():
     return total_propina_por_empresa
 
 
-calcular_total_gasto_por_empresa()
-
-
-def politico_mais_recebeu():
-    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
-    info_politicos = calcular_montante()
+def politico_mais_recebeu(a, b):
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = a
+    info_politicos = b
     maior_montante = 0
     politico_mais_propinas = {}
-    
+
     for politico in info_politicos:
         propinas_politico = politico['Propinas']
         parcelas_politico = politico['Parcelas']
         montantes_politico = []
         juros_politico = 0
-        
+
         for parcela in parcelas_politico:
             juros = taxa_de_juros / 12
             montante_individual = propinas_politico[0] * ((1 + juros) ** parcela - 1) / juros
@@ -107,7 +101,7 @@ def politico_mais_recebeu():
             juros_politico += montante_individual - propinas_politico[0]
 
         montante_total = sum(montantes_politico)
-        
+
         if montante_total > maior_montante:
             maior_montante = montante_total
             politico_mais_propinas = {
@@ -116,25 +110,22 @@ def politico_mais_recebeu():
                 "Total com Juros": montante_total,
                 "Juros Recebidos": juros_politico
             }
-            
+
     return politico_mais_propinas
 
 
-politico_mais_recebeu()
-
-
-def politico_menos_recebeu():
-    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
-    info_politicos = calcular_montante()
+def politico_menos_recebeu(a, b):
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = a
+    info_politicos = b
     menor_montante = float('inf')
     politico_menos_propinas = {}
-    
+
     for politico in info_politicos:
         propinas_politico = politico['Propinas']
         parcelas_politico = politico['Parcelas']
         montantes_politico = []
         juros_politico = 0
-        
+
         for parcela in parcelas_politico:
             juros = taxa_de_juros / 12
             montante_individual = propinas_politico[0] * ((1 + juros) ** parcela - 1) / juros
@@ -142,7 +133,7 @@ def politico_menos_recebeu():
             juros_politico += montante_individual - propinas_politico[0]
 
         montante_total = sum(montantes_politico)
-        
+
         if montante_total < menor_montante:
             menor_montante = montante_total
             politico_menos_propinas = {
@@ -151,25 +142,22 @@ def politico_menos_recebeu():
                 "Total com Juros": montante_total,
                 "Juros Recebidos": juros_politico
             }
-    
+
     return politico_menos_propinas
 
 
-politico_menos_recebeu()
-
-
-def empresa_mais_pagou():
-    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
-    info_empresas = calcular_montante()
+def empresa_mais_pagou(a, b):
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = a
+    info_empresas = b
     maior_montante = 0
     empresa_mais_propinas = {}
-    
+
     for empresa in info_empresas:
         propinas_empresa = empresa['Propinas']
         parcelas_empresa = empresa['Parcelas']
         montantes_empresa = []
         juros_empresa = 0
-        
+
         for parcela in parcelas_empresa:
             juros = taxa_de_juros / 12
             montante_individual = propinas_empresa[0] * ((1 + juros) ** parcela - 1) / juros
@@ -177,7 +165,7 @@ def empresa_mais_pagou():
             juros_empresa += montante_individual - propinas_empresa[0]
 
         montante_total = sum(montantes_empresa)
-        
+
         if montante_total > maior_montante:
             maior_montante = montante_total
             empresa_mais_propinas = {
@@ -186,16 +174,13 @@ def empresa_mais_pagou():
                 "Total com Juros": montante_total,
                 "Juros Pagos": juros_empresa
             }
-    
+
     return empresa_mais_propinas
 
 
-empresa_mais_pagou()
-
-
-def empresa_menos_pagou():
-    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
-    info_empresas = calcular_montante()
+def empresa_menos_pagou(a, b):
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = a
+    info_empresas = b
     menor_montante = float('inf')
     empresa_menos_propinas = {}
 
@@ -216,7 +201,7 @@ def empresa_menos_pagou():
         if montante_total < menor_montante:
             menor_montante = montante_total
             empresa_menos_propinas = {
-                "Nome": "Empresa " + str(info_empresas.index(empresa) + 1),                
+                "Nome": "Empresa " + str(info_empresas.index(empresa) + 1),
                 "Propinas Pagas": sum(propinas_empresa),
                 "Total com Juros": montante_total,
                 "Juros Pagos": juros_empresa
@@ -224,21 +209,18 @@ def empresa_menos_pagou():
 
     return empresa_menos_propinas
 
-    
-empresa_menos_pagou()
 
-
-def media_propina_politico():
-    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = ler_arquivo()
-    info_politicos = calcular_montante()
+def media_propina_politico(a, b):
+    taxa_de_juros, numero_de_politicos, numero_de_empresas, valores_das_propinas, numeros_de_parcelas = a
+    info_politicos = b
     media_propinas = []
-    
+
     for politico in info_politicos:
         propinas_politico = politico['Propinas']
         parcelas_politico = politico['Parcelas']
         montantes_politico = []
         juros_politico = 0
-        
+
         for parcela in parcelas_politico:
             juros = taxa_de_juros / 12
             montante_individual = propinas_politico[0] * ((1 + juros) ** parcela - 1) / juros
@@ -247,17 +229,14 @@ def media_propina_politico():
 
         montante_total = sum(montantes_politico)
         media_propinas.append(montante_total / len(info_politicos))
-    
+
     media_total = sum(media_propinas) / len(media_propinas)
-    
+
     return media_total
 
 
-media_propina_politico()
-
-
-def media_propina_por_empresa():
-    info_empresas = calcular_montante()
+def media_propina_por_empresa(b):
+    info_empresas = b
     media_por_empresa = {}
 
     for empresa in info_empresas:
@@ -269,53 +248,64 @@ def media_propina_por_empresa():
     return media_por_empresa
 
 
-media_propina_por_empresa()
+def salvar_dados_em_arquivo(b, c, d, e, f, g, h, i):
+    montantes = b
+    total_gasto_empresa = c
+    politico_mais = d
+    politico_menos = e
 
-
-def salvar_dados_em_arquivo():
-    montantes = calcular_montante()
-    total_gasto_empresa = calcular_total_gasto_por_empresa()
-    politico_mais = politico_mais_recebeu()
-    politico_menos = politico_menos_recebeu()
-    
     with open("resultados.txt", "w") as arquivo:
         arquivo.write("Montantes dos políticos:\n")
         for idx, politico in enumerate(montantes):
-            arquivo.write(f"Político {idx+1}:\n")
+            arquivo.write(f"Político {idx + 1}:\n")
             arquivo.write(f"Propinas: {politico['Propinas']}\n")
             arquivo.write(f"Parcelas: {politico['Parcelas']}\n")
             arquivo.write(f"Montante total: {politico['Montante']:.2f}\n\n")
-        
+
         arquivo.write("Total gasto por empresa:\n")
         for idx, valor in enumerate(total_gasto_empresa):
-            arquivo.write(f"Empresa {idx+1}: {valor:.2f}\n")
+            arquivo.write(f"Empresa {idx + 1}: {valor:.2f}\n")
         arquivo.write("\n")
-        
+
         arquivo.write("Político que mais recebeu:\n")
         arquivo.write(f"Nome: {politico_mais['Nome']}\n")
         arquivo.write(f"Propinas Recebidas: {politico_mais['Propinas Recebidas']:.2f}\n")
         arquivo.write(f"Total com Juros: {politico_mais['Total com Juros']:.2f}\n")
         arquivo.write(f"Juros Recebidos: {politico_mais['Juros Recebidos']:.2f}\n\n")
-        
+
         arquivo.write("Político que menos recebeu:\n")
         arquivo.write(f"Nome: {politico_menos['Nome']}\n")
         arquivo.write(f"Propinas Recebidas: {politico_menos['Propinas Recebidas']:.2f}\n")
         arquivo.write(f"Total com Juros: {politico_menos['Total com Juros']:.2f}\n")
         arquivo.write(f"Juros Recebidos: {politico_menos['Juros Recebidos']:.2f}\n\n")
-        
+
         arquivo.write("Empresa que mais pagou:\n")
-        arquivo.write(str(empresa_mais_pagou()) + "\n\n")
+        arquivo.write(str(f) + "\n\n")
 
         arquivo.write("Empresa que menos pagou:\n")
-        arquivo.write(str(empresa_menos_pagou()) + "\n\n")
+        arquivo.write(str(g) + "\n\n")
 
         arquivo.write("Média de propina por político:\n")
-        arquivo.write(str(media_propina_politico()) + "\n\n")
+        arquivo.write(str(h) + "\n\n")
 
         arquivo.write("Média de propina por empresa:\n")
-        arquivo.write(str(media_propina_por_empresa()) + "\n\n")
+        arquivo.write(str(i) + "\n\n")
 
     arquivo.close()
 
 
-salvar_dados_em_arquivo()
+def main():
+    a = ler_arquivo()
+    b = calcular_montante(a)
+    c = calcular_total_gasto_por_empresa(a)
+    d = politico_mais_recebeu(a, b)
+    e = politico_menos_recebeu(a, b)
+    f = empresa_mais_pagou(a, b)
+    g = empresa_menos_pagou(a, b)
+    h = media_propina_politico(a, b)
+    i = media_propina_por_empresa(b)
+    salvar_dados_em_arquivo(b, c, d, e, f, g, h, i)
+
+
+if __name__ == "__main__":
+    main()
